@@ -191,19 +191,21 @@ class ReactComp extends Component {
       return null;
     }
     return (
-      <View>
+      <View style={{ flex: 1 }}>
         {this.props.topHeader ? this.props.topHeader() : null}
-        <FlatList
-          ref={(c) => this.list = c}
-          style={this.props.style}
-          renderItem={this.renderRow.bind(this)}
-          data={this.state.reservations}
-          onScroll={this.onScroll.bind(this)}
-          showsVerticalScrollIndicator={false}
-          scrollEventThrottle={200}
-          onMoveShouldSetResponderCapture={() => {this.onListTouch(); return false;}}
-          keyExtractor={(item, index) => String(index)}
-        />
+        <View style={{ flex: 1 }}>
+          <FlatList
+            ref={(c) => this.list = c}
+            style={this.props.style}
+            renderItem={this.renderRow.bind(this)}
+            data={this.state.reservations}
+            onScroll={this.onScroll.bind(this)}
+            showsVerticalScrollIndicator={false}
+            scrollEventThrottle={200}
+            onMoveShouldSetResponderCapture={() => {this.onListTouch(); return false;}}
+            keyExtractor={(item, index) => String(index)}
+          />
+        </View>
       </View>
     );
   }
