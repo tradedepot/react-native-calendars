@@ -77,7 +77,9 @@ export default class AgendaView extends Component {
     // Hide knob button. Default = false
     hideKnob: PropTypes.bool,
     // Month format in calendar title. Formatting values: http://arshaw.com/xdate/#Formatting
-    monthFormat: PropTypes.string
+    monthFormat: PropTypes.string,
+    // optional header component
+    topHeader: PropTypes.func,
   };
 
   constructor(props) {
@@ -266,6 +268,7 @@ export default class AgendaView extends Component {
     return (
       <ReservationsList
         rowHasChanged={this.props.rowHasChanged}
+        topHeader={this.props.topHeader}
         renderItem={this.props.renderItem}
         renderDay={this.props.renderDay}
         renderEmptyDate={this.props.renderEmptyDate}
