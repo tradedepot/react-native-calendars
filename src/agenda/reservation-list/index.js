@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {
   FlatList,
   ActivityIndicator,
-  View,
+  View
 } from 'react-native';
 import Reservation from './reservation';
 import PropTypes from 'prop-types';
@@ -32,6 +32,9 @@ class ReactComp extends Component {
 
     selectedDay: PropTypes.instanceOf(XDate),
     topDay: PropTypes.instanceOf(XDate),
+
+    // optional header
+    topHeader: PropTypes.func,
   };
 
   constructor(props) {
@@ -188,17 +191,20 @@ class ReactComp extends Component {
       return null;
     }
     return (
-      <FlatList
-        ref={(c) => this.list = c}
-        style={this.props.style}
-        renderItem={this.renderRow.bind(this)}
-        data={this.state.reservations}
-        onScroll={this.onScroll.bind(this)}
-        showsVerticalScrollIndicator={false}
-        scrollEventThrottle={200}
-        onMoveShouldSetResponderCapture={() => {this.onListTouch(); return false;}}
-        keyExtractor={(item, index) => String(index)}
-      />
+      <View>
+        {this.props.topHeader ? this.props.topHeader() : null}
+        <FlatList
+          ref={(c) => this.list = c}
+          style={this.props.style}
+          renderItem={this.renderRow.bind(this)}
+          data={this.state.reservations}
+          onScroll={this.onScroll.bind(this)}
+          showsVerticalScrollIndicator={false}
+          scrollEventThrottle={200}
+          onMoveShouldSetResponderCapture={() => {this.onListTouch(); return false;}}
+          keyExtractor={(item, index) => String(index)}
+        />
+      </View>
     );
   }
 }
